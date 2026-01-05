@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typebot Callback Demo - Dynamic Image Background</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .ken-burns-container {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ken-burns-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 1s ease-in-out;
+      opacity: 1;
+    }
+
+    .ken-burns-container img.fade-out {
+      animation: none; /* Stop any animation */
+      opacity: 0;
+    }
+
+    .ken-burns-container img.kenBurnsZoomIn {
+      animation: kenBurnsZoomIn 20s ease-in-out 1 forwards;
+    }
+
+    @keyframes kenBurnsZoomIn {
+      0% { transform: scale(1.0); }
+      100% { transform: scale(1.15) translate(-5%, -5%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="ken-burns-container">
+    <img id="backgroundImage" class="kenBurnsZoomIn" src="bg.jpg" alt="Background Image">
+  </div>
+  <script type="module">
+    import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0.2/dist/web.js'
+
+    function changeImageAndRestartAnimation(newImageSrc) {
+      const backgroundImage = document.getElementById('backgroundImage');
+      // Fade out the current image
+      backgroundImage.classList.add('fade-out');
+
+      setTimeout(() => {
+        // Once the image is faded out, change the source
+        backgroundImage.src = newImageSrc;
+        backgroundImage.classList.remove('fade-out');
+        // Immediately apply a new animation class with a slight delay to ensure it's picked up
+        setTimeout(() => {
+          backgroundImage.classList.remove('kenBurnsZoomIn');
+          void backgroundImage.offsetWidth; // Trigger DOM reflow
+          backgroundImage.classList.add('kenBurnsZoomIn');
+        }, 20); // This delay is just to ensure the class removal has taken effect
+      }, 1000); // This should match the CSS transition time
+    }
+
+    Typebot.initPopup({
+      typebot: "template-guest-feedback-survey-t8wuadl",
+      prefilledVariables: {
+        "rental_name": "Beach Retreat",
+        "first_name": "Satoshi"
+      },
+      autoShowDelay: 1000,
+      onNewInputBlock: (inputBlock) => {
+        console.log('New input block displayed', inputBlock.id)
+      },
+      onAnswer: (answer) => {
+        console.log('Answer received', answer.message, answer.blockId)
+        if (answer.blockId === "clcrb4kx8000v3b6mudh73ho6" && answer.message.includes("worse")) {
+          changeImageAndRestartAnimation("worse.jpg");
+        }
+        // Added conditional check for "better" and specific blockId
+        if (answer.blockId === "clcrb4kx8000v3b6mudh73ho6" && answer.message.includes("better")) {
+          changeImageAndRestartAnimation("better.jpg");
+        }
+        // Added conditional check for "better" and specific blockId
+        if (answer.blockId === "clcrb4kx8000v3b6mudh73ho6" && answer.message.includes("same")) {
+          changeImageAndRestartAnimation("same.jpg");
+        }
+      },
+      onInit: () => {
+        console.log('Bot initialized')
+      },
+      onEnd: () => {
+        changeImageAndRestartAnimation("thank-you.jpg");
+      },
+    });
+  </script>
+</body>
+</html>
+
+
+
