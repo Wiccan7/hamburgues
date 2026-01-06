@@ -1,111 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Typebot Callback Demo - Dynamic Image Background</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger House</title>
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-    .ken-burns-container {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-    }
+body{
+  background:#111;
+  color:#fff;
+}
 
-    .ken-burns-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: opacity 1s ease-in-out;
-      opacity: 1;
-    }
+a{
+  text-decoration:none;
+  color:inherit;
+}
 
-    .ken-burns-container img.fade-out {
-      animation: none; /* Stop any animation */
-      opacity: 0;
-    }
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(0,0,0,0.85);
+  padding:15px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+}
 
-    .ken-burns-container img.kenBurnsZoomIn {
-      animation: kenBurnsZoomIn 20s ease-in-out 1 forwards;
-    }
+header h1{
+  color:#f4c10f;
+  font-size:24px;
+}
 
-    @keyframes kenBurnsZoomIn {
-      0% { transform: scale(1.0); }
-      100% { transform: scale(1.15) translate(-5%, -5%); }
-    }
-  </style>
+nav a{
+  margin-left:20px;
+  font-weight:bold;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  background:url("https://images.unsplash.com/photo-1550547660-d9450f859349") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  padding:40px;
+}
+
+.hero-content{
+  max-width:600px;
+  background:rgba(0,0,0,0.7);
+  padding:40px;
+  border-radius:10px;
+}
+
+.hero-content h2{
+  font-size:48px;
+  margin-bottom:20px;
+}
+
+.hero-content p{
+  font-size:18px;
+  margin-bottom:30px;
+}
+
+.btn{
+  background:#f4c10f;
+  color:#000;
+  padding:15px 30px;
+  font-weight:bold;
+  border-radius:5px;
+  display:inline-block;
+}
+
+/* SECTION */
+section{
+  padding:80px 40px;
+}
+
+.section-title{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:50px;
+  color:#f4c10f;
+}
+
+/* CARDÁPIO */
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.card{
+  background:#1c1c1c;
+  border-radius:10px;
+  overflow:hidden;
+  text-align:center;
+}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card h3{
+  margin:15px 0;
+}
+
+.card p{
+  padding:0 15px;
+  font-size:14px;
+  color:#ccc;
+}
+
+.price{
+  margin:15px 0;
+  font-size:20px;
+  color:#f4c10f;
+}
+
+/* DELIVERY */
+.delivery{
+  background:#000;
+  text-align:center;
+}
+
+.delivery p{
+  max-width:600px;
+  margin:0 auto 30px;
+}
+
+/* FOOTER */
+footer{
+  background:#000;
+  padding:30px;
+  text-align:center;
+  color:#aaa;
+}
+</style>
 </head>
+
 <body>
-  <div class="ken-burns-container">
-    <img id="backgroundImage" class="kenBurnsZoomIn" src="bg.jpg" alt="Background Image">
+
+<header>
+  <h1>Burger House</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Cardápio</a>
+    <a href="#delivery">Delivery</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h2>O Hambúrguer Perfeito</h2>
+    <p>Ingredientes selecionados, carne suculenta e sabor que vicia.</p>
+    <a href="#menu" class="btn">Ver Cardápio</a>
   </div>
-  <script type="module">
-    import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0.2/dist/web.js'
+</section>
 
-    function changeImageAndRestartAnimation(newImageSrc) {
-      const backgroundImage = document.getElementById('backgroundImage');
-      // Fade out the current image
-      backgroundImage.classList.add('fade-out');
+<section id="menu">
+  <h2 class="section-title">Nosso Cardápio</h2>
 
-      setTimeout(() => {
-        // Once the image is faded out, change the source
-        backgroundImage.src = newImageSrc;
-        backgroundImage.classList.remove('fade-out');
-        // Immediately apply a new animation class with a slight delay to ensure it's picked up
-        setTimeout(() => {
-          backgroundImage.classList.remove('kenBurnsZoomIn');
-          void backgroundImage.offsetWidth; // Trigger DOM reflow
-          backgroundImage.classList.add('kenBurnsZoomIn');
-        }, 20); // This delay is just to ensure the class removal has taken effect
-      }, 1000); // This should match the CSS transition time
-    }
+  <div class="menu">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+      <h3>Classic Burger</h3>
+      <p>Pão brioche, carne 180g, queijo, alface e tomate.</p>
+      <div class="price">R$ 29,90</div>
+    </div>
 
-    Typebot.initPopup({
-      typebot: "template-guest-feedback-survey-t8wuadl",
-      prefilledVariables: {
-        "rental_name": "Beach Retreat",
-        "first_name": "Satoshi"
-      },
-      autoShowDelay: 1000,
-      onNewInputBlock: (inputBlock) => {
-        console.log('New input block displayed', inputBlock.id)
-      },
-      onAnswer: (answer) => {
-        console.log('Answer received', answer.message, answer.blockId)
-        if (answer.blockId === "clcrb4kx8000v3b6mudh73ho6" && answer.message.includes("worse")) {
-          changeImageAndRestartAnimation("worse.jpg");
-        }
-        // Added conditional check for "better" and specific blockId
-        if (answer.blockId === "clcrb4kx8000v3b6mudh73ho6" && answer.message.includes("better")) {
-          changeImageAndRestartAnimation("better.jpg");
-        }
-        // Added conditional check for "better" and specific blockId
-        if (answer.blockId === "clcrb4kx8000v3b6mudh73ho6" && answer.message.includes("same")) {
-          changeImageAndRestartAnimation("same.jpg");
-        }
-      },
-      onInit: () => {
-        console.log('Bot initialized')
-      },
-      onEnd: () => {
-        changeImageAndRestartAnimation("thank-you.jpg");
-      },
-    });
-  </script>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d">
+      <h3>Cheese Bacon</h3>
+      <p>Queijo duplo, bacon crocante e molho especial.</p>
+      <div class="price">R$ 34,90</div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+      <h3>Monster Burger</h3>
+      <p>Dois hambúrgueres, cheddar, bacon e cebola crispy.</p>
+      <div class="price">R$ 42,90</div>
+    </div>
+  </div>
+</section>
+
+<section class="delivery" id="delivery">
+  <h2 class="section-title">Delivery Rápido</h2>
+  <p>Peça agora e receba seu hambúrguer quentinho na sua casa.</p>
+  <a href="https://wa.me/5500000000000" class="btn">Pedir no WhatsApp</a>
+</section>
+
+<section id="contato">
+  <h2 class="section-title">Horário & Contato</h2>
+  <p style="text-align:center">
+    Seg a Dom: 18h às 23h<br>
+    📍 Centro da Cidade<br>
+    📞 (00) 00000-0000
+  </p>
+</section>
+
+<footer>
+  © 2026 Burger House — Todos os direitos reservados
+</footer>
+
+<script>
+// Scroll suave
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href'))
+      .scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
 </body>
 </html>
-
-
-
