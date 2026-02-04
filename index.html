@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamburgueria 14 | O melhor hambúrguer artesanal</title>
+    <title>NOXER | Acesso do Cliente</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset e configurações gerais */
         * {
             margin: 0;
             padding: 0;
@@ -14,985 +13,317 @@
         }
 
         :root {
-            --primary-black: #111111;
-            --secondary-black: #1a1a1a;
-            --primary-yellow: #FFC107;
-            --secondary-yellow: #FFD54F;
-            --primary-red: #D32F2F;
-            --secondary-red: #F44336;
-            --text-light: #FFFFFF;
-            --text-gray: #CCCCCC;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            --background: #0d0f16;
+            --surface: #151826;
+            --card: #1c2133;
+            --accent: #7c5cff;
+            --accent-soft: rgba(124, 92, 255, 0.25);
+            --text-primary: #f5f6ff;
+            --text-secondary: #a8b0c5;
+            --success: #40d9a2;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary-black);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at top, rgba(124, 92, 255, 0.12), transparent 60%),
+                radial-gradient(circle at right, rgba(64, 217, 162, 0.08), transparent 45%),
+                var(--background);
+            color: var(--text-primary);
+            min-height: 100vh;
         }
 
         a {
-            text-decoration: none;
             color: inherit;
+            text-decoration: none;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
+        .page {
+            display: grid;
+            grid-template-columns: minmax(260px, 1fr) minmax(320px, 420px);
+            gap: 60px;
+            align-items: center;
+            min-height: 100vh;
+            padding: 48px 8vw;
         }
 
-        section {
-            padding: 80px 0;
+        .brand {
+            max-width: 560px;
         }
 
-        h1, h2, h3 {
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-red), var(--primary-yellow));
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-red), var(--primary-yellow));
-            color: var(--text-light);
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
-        }
-
-        /* Header */
-        header {
-            height: 100vh;
-            background: 
-                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
-                url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') center/cover no-repeat;
+        .brand-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            gap: 14px;
+            margin-bottom: 28px;
         }
 
-        .header-content {
-            max-width: 800px;
-            padding: 20px;
-            z-index: 2;
-        }
-
-        .header-content h1 {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-            background: linear-gradient(to right, var(--primary-yellow), var(--primary-red));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .header-content p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            color: var(--text-gray);
-        }
-
-        .burger-animation {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            background: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1190&q=80') repeat-x;
-            background-size: contain;
-            opacity: 0.7;
-            animation: moveBurger 20s linear infinite;
-        }
-
-        @keyframes moveBurger {
-            0% { background-position: 0 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        /* Nossa História */
-        .history-section {
-            background-color: var(--secondary-black);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .history-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .history-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: var(--text-gray);
-        }
-
-        .floating-ingredients {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            opacity: 0.1;
-        }
-
-        .ingredient {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            filter: grayscale(100%);
-        }
-
-        .ingredient-1 {
-            top: 20%;
-            left: 10%;
-            background-image: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add');
-        }
-
-        .ingredient-2 {
-            top: 40%;
-            right: 15%;
-            background-image: url('https://images.unsplash.com/photo-1604908177522-0503dbe7e27b');
-        }
-
-        .ingredient-3 {
-            bottom: 30%;
-            left: 15%;
-            background-image: url('https://images.unsplash.com/photo-1598514982840-56a87a1f7e57');
-        }
-
-        /* Cardápio */
-        .menu-section {
-            background-color: var(--primary-black);
-        }
-
-        .menu-category {
-            margin-bottom: 60px;
-        }
-
-        .menu-category h3 {
-            font-size: 1.8rem;
-            color: var(--primary-yellow);
-            margin-bottom: 30px;
-            text-align: center;
-            border-bottom: 2px solid var(--primary-red);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        .menu-grid {
+        .brand-mark {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent), #3dd5f3);
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            place-items: center;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
-        .menu-item {
-            background-color: var(--secondary-black);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .brand-mark span {
+            font-size: 1.3rem;
+            color: #0d0f16;
         }
 
-        .menu-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-yellow);
-            box-shadow: 0 15px 30px rgba(255, 193, 7, 0.2);
+        .brand-header h1 {
+            font-size: 2.6rem;
+            letter-spacing: 3px;
         }
 
-        .menu-item-img {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
+        .brand p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 32px;
         }
 
-        .menu-item-content {
-            padding: 20px;
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
         }
 
-        .menu-item-content h4 {
+        .highlight-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 18px;
+            border: 1px solid rgba(124, 92, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(6, 8, 15, 0.4);
+        }
+
+        .highlight-card i {
+            color: var(--accent);
             font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--text-light);
+            margin-bottom: 12px;
         }
 
-        .menu-item-content p {
-            color: var(--text-gray);
-            margin-bottom: 15px;
+        .highlight-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .highlight-card span {
+            color: var(--text-secondary);
             font-size: 0.95rem;
         }
 
-        .menu-item-price {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-red);
+        .login-panel {
+            background: var(--card);
+            padding: 36px;
+            border-radius: 26px;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            box-shadow: 0 25px 60px rgba(5, 8, 20, 0.5);
+        }
+
+        .login-panel h2 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .login-panel p {
+            color: var(--text-secondary);
+            margin-bottom: 26px;
+        }
+
+        .status {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 10px;
+            background: rgba(64, 217, 162, 0.12);
+            color: var(--success);
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
         }
 
-        .menu-item-price i {
-            color: var(--primary-yellow);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .menu-item-price i:hover {
-            transform: scale(1.2);
-        }
-
-        /* Promoção */
-        .promo-section {
-            background: 
-                linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
-                url('https://images.unsplash.com/photo-1528605248644-14dd04022da1') center/cover no-repeat;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .promo-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .promo-content h2 {
-            color: var(--primary-yellow);
-        }
-
-        .promo-content p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            color: var(--text-gray);
-        }
-
-        .promo-price {
-            font-size: 3.5rem;
-            color: var(--primary-red);
-            font-weight: 800;
-            margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Por que escolher a 14? */
-        .features-section {
-            background-color: var(--secondary-black);
-        }
-
-        .features-grid {
+        form {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 18px;
         }
 
-        .feature-card {
-            background-color: var(--primary-black);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
         }
 
-        .feature-card:hover {
-            border-color: var(--primary-red);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(211, 47, 47, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary-yellow);
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
-
-        .feature-card p {
-            color: var(--text-gray);
-        }
-
-        /* Galeria */
-        .gallery-section {
-            background-color: var(--primary-black);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .gallery-item {
-            height: 250px;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
-
-        /* FAQ */
-        .faq-section {
-            background-color: var(--secondary-black);
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background-color: var(--primary-black);
-            margin-bottom: 15px;
-            border-radius: 10px;
-            overflow: hidden;
-            border-left: 5px solid var(--primary-red);
-        }
-
-        .faq-question {
-            padding: 20px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text-light);
-            cursor: pointer;
+        .input-wrapper {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 10px;
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid transparent;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .faq-question i {
-            color: var(--primary-yellow);
-            transition: transform 0.3s ease;
+        .input-wrapper i {
+            color: var(--text-secondary);
         }
 
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            color: var(--text-gray);
+        input {
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            width: 100%;
+            font-size: 1rem;
+            outline: none;
         }
 
-        .faq-item.active .faq-answer {
-            padding: 0 20px 20px 20px;
-            max-height: 200px;
+        .input-wrapper:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
         }
 
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        /* Localização */
-        .location-section {
-            background-color: var(--primary-black);
-            text-align: center;
-        }
-
-        .location-info {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .location-info p {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--text-gray);
-        }
-
-        .location-icon {
-            color: var(--primary-red);
-            margin-right: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--secondary-black);
-            padding: 60px 0 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            color: var(--primary-yellow);
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary-red);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        .footer-column p {
-            color: var(--text-gray);
-            margin-bottom: 10px;
-        }
-
-        .social-links {
+        .options {
             display: flex;
-            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .options label {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .options input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+        }
+
+        .button {
+            border: none;
+            border-radius: 14px;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0d0f16;
+            background: linear-gradient(135deg, var(--accent), #3dd5f3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(124, 92, 255, 0.3);
+        }
+
+        .support {
             margin-top: 20px;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-black);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background-color: var(--primary-red);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-gray);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
-        /* WhatsApp fixo */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            animation: pulse-whatsapp 2s infinite;
+        .support a {
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+        .footer {
+            margin-top: 26px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
         }
 
-        @keyframes pulse-whatsapp {
-            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5); }
-            50% { box-shadow: 0 4px 25px rgba(37, 211, 102, 0.8); }
-            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5); }
-        }
+        @media (max-width: 900px) {
+            .page {
+                grid-template-columns: 1fr;
+                padding: 40px 6vw 60px;
+            }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            .header-content h1 {
-                font-size: 3rem;
-            }
-            
-            .header-content p {
-                font-size: 1.2rem;
-            }
-            
-            .promo-price {
-                font-size: 2.5rem;
-            }
-            
-            section {
-                padding: 60px 0;
+            .login-panel {
+                max-width: 480px;
+                margin: 0 auto;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header/Hero Section -->
-    <header>
-        <div class="header-content">
-            <h1>Hamburgueria 14</h1>
-            <p>O hambúrguer que respeita sua fome</p>
-            <a href="#cardapio" class="btn">Ver Cardápio</a>
-        </div>
-        <div class="burger-animation"></div>
-    </header>
+    <main class="page">
+        <section class="brand">
+            <div class="brand-header">
+                <div class="brand-mark"><span>N</span></div>
+                <h1>NOXER</h1>
+            </div>
+            <p>
+                A NOXER é a assessoria de marketing que conecta estratégia, dados e criação para acelerar resultados.
+                Faça login para acompanhar campanhas, aprovações e relatórios do seu negócio.
+            </p>
+            <div class="highlight-grid">
+                <div class="highlight-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Insights em tempo real</h3>
+                    <span>Painéis com indicadores de performance e mídia.</span>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Briefings organizados</h3>
+                    <span>Todas as solicitações centralizadas em um só lugar.</span>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Ativações rápidas</h3>
+                    <span>Fluxos ágeis para aprovar e lançar campanhas.</span>
+                </div>
+            </div>
+        </section>
 
-    <!-- Nossa História -->
-    <section class="history-section">
-        <div class="container">
-            <div class="history-content">
-                <h2>Nossa História</h2>
-                <p>A Hamburgueria 14 nasceu de forma simples, com a ideia de criar hambúrgueres artesanais de verdade. Cada receita foi pensada para entregar sabor, qualidade e experiência em cada mordida.</p>
-                <p>Nossa paixão por hambúrgueres nos levou a buscar os melhores ingredientes e desenvolver técnicas exclusivas de preparo. O resultado é uma experiência gastronômica única que vai além do simples hambúrguer.</p>
+        <section class="login-panel">
+            <h2>Portal do Cliente</h2>
+            <p>Use suas credenciais para acessar o ambiente exclusivo da NOXER.</p>
+            <div class="status">
+                <i class="fas fa-circle"></i>
+                Atendimento online • Suporte em até 10 min
             </div>
-            <div class="floating-ingredients">
-                <div class="ingredient ingredient-1"></div>
-                <div class="ingredient ingredient-2"></div>
-                <div class="ingredient ingredient-3"></div>
+            <form>
+                <div>
+                    <label for="email">E-mail corporativo</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input id="email" type="email" placeholder="voce@empresa.com" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="password">Senha de acesso</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input id="password" type="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+                <div class="options">
+                    <label>
+                        <input type="checkbox" checked>
+                        Manter conectado
+                    </label>
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+                <button class="button" type="submit">Entrar no painel</button>
+            </form>
+            <div class="support">
+                Precisa de ajuda? <a href="#">Fale com o time NOXER</a>
             </div>
-        </div>
-    </section>
-
-    <!-- Cardápio -->
-    <section id="cardapio" class="menu-section">
-        <div class="container">
-            <h2>Cardápio</h2>
-            
-            <div class="menu-category">
-                <h3>Hambúrgueres</h3>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="Clássico 14" class="menu-item-img">
-                        <div class="menu-item-content">
-                            <h4>Clássico 14</h4>
-                            <p>180g de carne artesanal, cheddar derretido, alface, tomate e molho especial da casa no pão brioche.</p>
-                            <div class="menu-item-price">
-                                <span>R$ 28,90</span>
-                                <i class="fas fa-cart-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b" alt="Bacon Supreme" class="menu-item-img">
-                        <div class="menu-item-content">
-                            <h4>Bacon Supreme</h4>
-                            <p>Hambúrguer 180g, bacon crocante, queijo prato, cebola caramelizada e molho barbecue.</p>
-                            <div class="menu-item-price">
-                                <span>R$ 32,90</span>
-                                <i class="fas fa-cart-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1550317138-10000687a72b" alt="Duplo Smash" class="menu-item-img">
-                        <div class="menu-item-content">
-                            <h4>Duplo Smash</h4>
-                            <p>Dois hambúrgueres smash de 100g cada, cheddar, cebola roxa, picles e molho especial.</p>
-                            <div class="menu-item-price">
-                                <span>R$ 35,90</span>
-                                <i class="fas fa-cart-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="footer">
+                © 2026 NOXER Marketing & Growth. Todos os direitos reservados.
             </div>
-            
-            <div class="menu-category">
-                <h3>Acompanhamentos</h3>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add" alt="Batata Frita" class="menu-item-img">
-                        <div class="menu-item-content">
-                            <h4>Batata Frita</h4>
-                            <p>Porção generosa de batata frita crocante, temperada com ervas finas e sal marinho.</p>
-                            <div class="menu-item-price">
-                                <span>R$ 12,90</span>
-                                <i class="fas fa-cart-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1604908177522-0503dbe7e27b" alt="Onion Rings" class="menu-item-img">
-                        <div class="menu-item-content">
-                            <h4>Onion Rings</h4>
-                            <p>Anéis de cebola empanados e fritos, crocantes por fora e macios por dentro.</p>
-                            <div class="menu-item-price">
-                                <span>R$ 14,90</span>
-                                <i class="fas fa-cart-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="menu-category">
-                <h3>Bebidas</h3>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1598514982840-56a87a1f7e57" alt="Refrigerante" class="menu-item-img">
-                        <div class="menu-item-content">
-                            <h4>Refrigerante</h4>
-                            <p>Lata 350ml. Opções: Coca-Cola, Guaraná Antarctica, Fanta Laranja, Sprite.</p>
-                            <div class="menu-item-price">
-                                <span>R$ 6,00</span>
-                                <i class="fas fa-cart-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6cf7" alt="Cerveja Artesanal" class="menu-item-img">
-                        <div class="menu-item-content">
-                            <h4>Cerveja Artesanal</h4>
-                            <p>Garrafa 500ml. Escolha entre IPA, Pilsen, Weiss ou Stout de cervejarias locais.</p>
-                            <div class="menu-item-price">
-                                <span>R$ 12,00</span>
-                                <i class="fas fa-cart-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Promoção -->
-    <section class="promo-section">
-        <div class="container">
-            <div class="promo-content">
-                <h2>Promoção da Semana</h2>
-                <p>Um combo completo para matar sua fome com o melhor da casa!</p>
-                <div class="promo-price">R$ 39,90</div>
-                <p>Clássico 14 + Batata Frita + Refrigerante</p>
-                <a href="#" class="btn">Pedir Agora</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Por que escolher a 14? -->
-    <section class="features-section">
-        <div class="container">
-            <h2>Por que escolher a 14?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🍔</div>
-                    <h3>Carne Selecionada</h3>
-                    <p>Utilizamos apenas carnes nobres, selecionadas diariamente para garantir a melhor qualidade.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔥</div>
-                    <h3>Grelha Artesanal</h3>
-                    <p>Nossa grelha exclusiva dá o ponto perfeito ao hambúrguer, selando os sucos e sabores.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Entrega Rápida</h3>
-                    <p>Entregamos em até 30 minutos para garantir que seu hambúrguer chegue quentinho.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⭐</div>
-                    <h3>Atendimento Premium</h3>
-                    <p>Nossa equipe está sempre pronta para oferecer a melhor experiência possível.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Galeria -->
-    <section class="gallery-section">
-        <div class="container">
-            <h2>Galeria</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://viagem.cnnbrasil.com.br/wp-content/uploads/sites/5/2024/05/TTBurger_021_Alta_CredTomasRangel-1.jpg?w=849&h=477&crop=0" alt="Hambúrguer artesanal">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://media.istockphoto.com/id/1309352410/pt/foto/cheeseburger-with-tomato-and-lettuce-on-wooden-board.jpg?s=612x612&w=0&k=20&c=NbaTZPOCYyRU37C1PMm0H9ty1Hu9FHS8SUBlUaygpls=" alt="Cheeseburger">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://supermercadosrondon.com.br/guiadecarnes/images/postagens/quer_fazer_hamburger_artesanal_perfeito_2019-05-14.jpg" alt="Hambúrguer perfeito">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://moinhoglobo.com.br/wp-content/uploads/2019/05/16-hamburguer.jpeg" alt="Hambúrguer artesanal 2">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq-section">
-        <div class="container">
-            <h2>Perguntas Frequentes</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Tem delivery?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Sim! Fazemos delivery todos os dias através dos nossos parceiros iFood e Rappi, ou você pode pedir diretamente pelo nosso WhatsApp.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Funciona aos domingos?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Sim! Funcionamos aos domingos das 18h às 23h. É um ótimo dia para reunir a família e amigos para um jantar especial.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Os hambúrgueres são artesanais?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Com certeza! Todos os nossos hambúrgueres são feitos artesanalmente na hora, desde a preparação da carne até a montagem final.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Vocês têm opções vegetarianas?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Sim! Temos o hambúrguer vegetariano feito com grão-de-bico, legumes e temperos especiais. Uma delícia mesmo para quem não é vegetariano!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Localização -->
-    <section class="location-section">
-        <div class="container">
-            <h2>📍 Onde Estamos</h2>
-            <div class="location-info">
-                <p><i class="fas fa-map-marker-alt location-icon"></i> Rua Fictícia, 14 — Centro, São Paulo - SP</p>
-                <p><i class="fas fa-clock location-icon"></i> Segunda a Sábado: 18h às 00h | Domingo: 18h às 23h</p>
-                <p><i class="fas fa-phone location-icon"></i> (11) 99999-9999</p>
-                <p><i class="fas fa-envelope location-icon"></i> contato@hamburgueria14.com.br</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>Hamburgueria 14</h3>
-                    <p>O hambúrguer que respeita sua fome. Nossa missão é proporcionar a melhor experiência gastronômica com hambúrgueres artesanais de altíssima qualidade.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contato</h3>
-                    <p><i class="fas fa-phone"></i> WhatsApp: (11) 99999-9999</p>
-                    <p><i class="fab fa-instagram"></i> Instagram: @hamburgueria14</p>
-                    <p><i class="fas fa-envelope"></i> E-mail: contato@hamburgueria14.com.br</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Horários</h3>
-                    <p>Segunda a Sábado: 18h às 00h</p>
-                    <p>Domingo: 18h às 23h</p>
-                    <p>Delivery: Todos os dias até 23h</p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>© 2026 Hamburgueria 14 - Site fictício criado para estudo e portfólio.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- WhatsApp Flutuante -->
-    <a href="https://wa.me/5511999999999" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script>
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                item.classList.toggle('active');
-                
-                // Fecha outros itens abertos
-                document.querySelectorAll('.faq-item').forEach(otherItem => {
-                    if (otherItem !== item && otherItem.classList.contains('active')) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-            });
-        });
-        
-        // Adicionar ao carrinho (simulação)
-        document.querySelectorAll('.fa-cart-plus').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const itemName = this.closest('.menu-item-content').querySelector('h4').textContent;
-                const itemPrice = this.closest('.menu-item-price').querySelector('span').textContent;
-                
-                // Animação de adicionar ao carrinho
-                this.style.color = '#4CAF50';
-                this.style.transform = 'scale(1.3)';
-                
-                setTimeout(() => {
-                    this.style.color = '';
-                    this.style.transform = '';
-                }, 300);
-                
-                // Mensagem de sucesso
-                alert(`${itemName} adicionado ao carrinho por ${itemPrice}!`);
-            });
-        });
-        
-        // Efeito de rolagem suave para links internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Animação dos ingredientes flutuantes
-        document.addEventListener('DOMContentLoaded', function() {
-            const ingredients = document.querySelectorAll('.ingredient');
-            
-            ingredients.forEach((ingredient, index) => {
-                // Posicionamento inicial aleatório
-                const randomX = Math.random() * 80 + 10;
-                const randomY = Math.random() * 80 + 10;
-                ingredient.style.left = `${randomX}%`;
-                ingredient.style.top = `${randomY}%`;
-                
-                // Animação flutuante
-                let direction = 1;
-                let position = 0;
-                
-                setInterval(() => {
-                    position += 0.5 * direction;
-                    
-                    if (position > 20 || position < -20) {
-                        direction *= -1;
-                    }
-                    
-                    ingredient.style.transform = `translateY(${position}px)`;
-                }, 100 + index * 50);
-            });
-        });
-    </script>
+        </section>
+    </main>
 </body>
 </html>
